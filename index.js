@@ -236,7 +236,55 @@ app.get('/:code', async (req, res) => {
       return res.redirect(301, data.original_url);
     }
 
-    res.status(404).send("Short URL tidak ditemukan.");
+  //  res.status(404).send("Short URL tidak ditemukan.");
+    res.status(404).send(`
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Link Tidak Ditemukan</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+            text-align: center;
+        }
+        h1 {
+            font-size: 120px;
+            margin: 0;
+            color: #ff4757;
+            line-height: 1;
+        }
+        h2 {
+            font-size: 24px;
+            margin: 10px 0;
+            color: #2f3542;
+        }
+        p {
+            font-size: 16px;
+            color: #747d8c;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>404</h1>
+        <h2>Oops! Link Hilang</h2>
+        <p>Maaf, Short URL yang kamu cari tidak terdaftar atau sudah kedaluwarsa.</p>
+    </div>
+</body>
+</html>
+`);
+    
   } catch (err) {
     console.error('Error saat redirect:', err);
     res.status(500).send("Terjadi kesalahan server.");
